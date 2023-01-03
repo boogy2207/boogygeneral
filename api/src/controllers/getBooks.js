@@ -13,7 +13,8 @@ const getBooks = async (req, res) => {
       const url = await axios.get(
          "https://www.googleapis.com/books/v1/volumes?q=react+filter=free-ebooks&key=AIzaSyC3J4dErWqR63bwO9rBzpMBWrnSIKTmjbk"
       );
-      const apiInfo = await url.data;
+      const apiInfo = await url.data.items;
+
       console.log(apiInfo);
       // const booksInfo = await url.data;
       // booksInfo.items.map((e) => {
