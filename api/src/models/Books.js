@@ -7,35 +7,30 @@ const { DataTypes } = require("sequelize");
 // exporto el modelo
 // defino el modelo
 module.exports = (sequelize) => {
-   sequelize.define("product", {
+   sequelize.define("books", {
       id: {
-         type: DataTypes.STRING(3),
+         type: DataTypes.STRING,
          primaryKey: true,
       },
-      name: {
+      title: {
          type: DataTypes.STRING,
          allowNull: false,
       },
-      flags: {
+      authors: {
          type: DataTypes.STRING,
          allowNull: false,
       },
-      continents: {
-         type: DataTypes.STRING,
-         allowNull: false,
-      },
-      capital: {
-         type: DataTypes.STRING,
-         allowNull: false,
-      },
-      subregion: {
+      description: {
          type: DataTypes.STRING,
       },
-      area: {
+      pagecount: {
          type: DataTypes.INTEGER,
       },
-      population: {
-         type: DataTypes.INTEGER,
+      imagelink: {
+         type: DataTypes.STRING,
+      },
+      language: {
+         type: DataTypes.STRING,
       },
    });
 };
