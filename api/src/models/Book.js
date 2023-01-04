@@ -32,5 +32,8 @@ module.exports = (sequelize) => {
       language: {
          type: DataTypes.STRING,
       },
+      price: {
+         type: DataTypes.DECIMAL,
+      },
    });
 };
