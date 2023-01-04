@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 const BtnTheme = lazy(() => import('./components/BtnTheme'));
 const NavBar = lazy(() => import('./components/NavBar'));
 import './App.css'
+import Card from './components/Card';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Suspense fallback={<h1>Loading...</h1>}><NavBar /></Suspense>
         <Suspense fallback={<h1>Loading...</h1>}><BtnTheme /></Suspense>
       </Box>
+      <Card/>
     </ThemeProvider>
   )
 }
