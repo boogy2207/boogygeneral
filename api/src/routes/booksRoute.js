@@ -1,7 +1,14 @@
 const { Router } = require("express");
-const { router } = require("../app");
-const getBooks = require("../controllers/getBooks");
 
-router.use("/books", getBooks);
+const booksRoute = Router();
 
-module.exports = router;
+booksRoute.get("/", async (req, res) => {
+   try {
+      const allBooks = await getBooks();
+      res.status(200).send(allBooks);
+   } catch (error) {
+      res.status(404).send({ error: error });
+   }
+});
+
+module.exports = Router;

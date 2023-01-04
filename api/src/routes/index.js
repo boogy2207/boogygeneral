@@ -1,13 +1,11 @@
 /** @format */
 //It could be in different route files
-const router = require("express").Router();
-const { getBooks } = require("../controllers/getBooks");
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const { Router } = require("express");
 
-router.get("/books", getBooks);
+const { router } = require("../app");
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+const { booksRoute } = require("./booksRoute");
 
-module.exports = router;
+router.use("/books", booksRoute);
+
+module.exports = Router;
