@@ -22,11 +22,11 @@ module.exports = (sequelize) => {
             allowNull: false,
          },
          description: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             default: "Amazing",
          },
          pagecount: {
-            type: DataTypes.FLOAT(2),
+            type: DataTypes.INTEGER,
          },
       },
       {

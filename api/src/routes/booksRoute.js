@@ -1,14 +1,17 @@
 const { Router } = require("express");
 
+const getBooks = require("../controllers/getBooks");
+
 const booksRoute = Router();
 
 booksRoute.get("/", async (req, res) => {
    try {
       const allBooks = await getBooks();
+      console.log(allBooks);
       res.status(200).send(allBooks);
    } catch (error) {
       res.status(404).send({ error: error });
    }
 });
 
-module.exports = Router;
+module.exports = booksRoute;

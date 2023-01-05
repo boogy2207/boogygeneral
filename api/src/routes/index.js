@@ -2,10 +2,10 @@
 //It could be in different route files
 const { Router } = require("express");
 
-const { router } = require("../app");
+const router = Router();
 
-const { booksRoute } = require("./booksRoute");
+const booksRoute = require("./booksRoute");
 
 router.use("/books", booksRoute);
 
-module.exports = Router;
+module.exports = router;
