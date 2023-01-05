@@ -19,11 +19,11 @@ module.exports = (sequelize) => {
             allowNull: false,
          },
          age: {
-            type: DataTypes.INTEGER(3),
+            type: DataTypes.INTEGER,
             allowNull: false,
          },
          dni: {
-            type: DataTypes.CHAR,
+            type: DataTypes.STRING,
             validate: { isAlpha: true },
          },
          city: {

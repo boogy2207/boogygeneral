@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
             allowNull: false,
          },
          description: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
          },
          category: {
             type: DataTypes.STRING,
@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
          },
          price: {
-            type: DataTypes.FLOAT(2),
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
             defaultValue: "Free Book",
          },
