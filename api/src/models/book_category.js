@@ -1,5 +1,3 @@
-/** @format */
-
 const { DataTypes } = require("sequelize");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
@@ -9,41 +7,26 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
    // defino el modelo
    sequelize.define(
-      "book",
+      "category",
       {
          id: {
             type: DataTypes.STRING,
             primaryKey: true,
          },
-         title: {
+         category: {
             type: DataTypes.STRING,
             allowNull: false,
          },
-         authors: {
+         title: {
             type: DataTypes.STRING,
             allowNull: false,
          },
          description: {
             type: DataTypes.TEXT,
-         },
-         category: {
-            type: DataTypes.STRING,
+            default: "Amazing",
          },
          pagecount: {
-            type: DataTypes.INTEGER,
-         },
-         imagelink: {
-            type: DataTypes.STRING,
-            defaultValue:
-               "https://images.unsplash.com/photo-1508169351866-777fc0047ac5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-         },
-         language: {
-            type: DataTypes.STRING,
-         },
-         price: {
             type: DataTypes.FLOAT(2),
-            allowNull: false,
-            defaultValue: "Free Book",
          },
       },
       {
