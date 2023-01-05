@@ -1,11 +1,10 @@
 /** @format */
-const { Books } = require("../db.js");
+const { Book } = require("../db");
 const axios = require("axios");
 const { Op } = require("sequelize");
 require("dotenv").config();
 
-const getBooks = async (req, res) => {
-   const { title } = req.query;
+const getBooks = async (title) => {
    if (!title) {
       try {
          const allBooks = await Book.findAll({
@@ -18,9 +17,10 @@ const getBooks = async (req, res) => {
          if (!allBooks.length) {
             //si está vacío
             const url = await axios.get(
-               "https://www.googleapis.com/books/v1/volumes?q={title}+filter=free-ebooks&key=AIzaSyC3J4dErWqR63bwO9rBzpMBWrnSIKTmjbk"
+               "https://www.googleapis.com/books/v1/volumes?q={all}&key=AIzaSyC3J4dErWqR63bwO9rBzpMBWrnSIKTmjbk"
             );
-            const urlData = await urlData.data.items;
+            console.log(url);
+            const urlData = await url.data.items;
 
             const booksInfo = await urlData.map((e) => {
                return {
@@ -28,6 +28,7 @@ const getBooks = async (req, res) => {
                   title: e.volumeInfo.title,
                   authors: e.volumeInfo.authors[0],
                   description: e.volumeInfo.description,
+                  category: e.volumeInfo.categories[0],
                   pagecount: e.volumeInfo.description,
                   imagelink: e.volumeInfo.imageLinks.thumbnail,
                   language: e.volumeInfo.language,
@@ -37,25 +38,26 @@ const getBooks = async (req, res) => {
                };
             });
             booksInfo.forEach((z) => {
-               book.findOrCreate({
+               Book.findOrCreate({
                   where: {
                      id: z.id,
                      title: z.title,
-                     authors: z.flags,
-                     description: z.continents,
-                     pagecount: z.capital,
-                     imagelink: z.subregion,
-                     language: z.area,
-                     price: z.population,
+                     authors: z.authors,
+                     description: z.description,
+                     category: z.category,
+                     pagecount: z.pagecount,
+                     imagelink: z.imagelink,
+                     language: z.language,
+                     price: z.price,
                   },
                });
             });
             return res.status(200).send(apiInfo);
          } else {
-            return res.status(200).send(allBooks);
+            console.log(error);
          }
       } catch (error) {
-         console.log(error);
+         return res.status(400).send("It doesnt work");
       }
    } else {
       try {
