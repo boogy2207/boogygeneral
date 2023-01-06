@@ -19,39 +19,32 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
          },
-         authors: {
+          authors: {
             type: DataTypes.STRING,
             allowNull: false,
          },
-         description: {
+          description: {
+            type: DataTypes.STRING(10000),
+         }, 
+          category: {
             type: DataTypes.STRING,
-         },
-         category: {
+            
+         }, 
+          pagecount: {
             type: DataTypes.STRING,
-         },
-         pagecount: {
-            type: DataTypes.INTEGER,
          },
          imagelink: {
             type: DataTypes.STRING,
             defaultValue:
                "https://images.unsplash.com/photo-1508169351866-777fc0047ac5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-         },
-         language: {
+         }, 
+          language: {
             type: DataTypes.STRING,
-         },
-         price: {
-            type: DataTypes.DECIMAL(10, 2),
-            allowNull: false,
-            defaultValue: "Free Book",
-         },
+         },   
+            price: {
+            type: DataTypes.STRING
+         },   
       },
-      {
-         sequelize,
-         paranoid: true,
-         timestamps: true,
-         // If you want to give a custom name to the deletedAt column
-         deletedAt: "destroyTime",
-      }
+       
    );
 };
