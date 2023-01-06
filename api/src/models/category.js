@@ -1,7 +1,13 @@
 const { DataTypes } = require("sequelize");
+// Exportamos una funcion que define el modelo
+// Luego le injectamos la conexion a sequelize.
+
+// exporto el modelo
+
 module.exports = (sequelize) => {
+   // defino el modelo
    sequelize.define(
-      "user_data",
+      "category",
       {
          id: {
             type: DataTypes.INTEGER,
@@ -10,37 +16,28 @@ module.exports = (sequelize) => {
             allowNull: false,
             unique: true,
          },
-         firstname: {
+         category: {
             type: DataTypes.STRING,
             allowNull: false,
          },
-         lastname: {
+         title: {
             type: DataTypes.STRING,
             allowNull: false,
          },
-         age: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-         },
-         dni: {
+         description: {
             type: DataTypes.STRING,
-            validate: { isAlpha: true },
+            default: "Amazing",
          },
-         city: {
-            type: DataTypes.STRING,
-            validate: { isAlpha: true },
-         },
-         postalcode: {
+         pagecount: {
             type: DataTypes.INTEGER,
-            validate: { isNumeric: true, len: [1, 6] },
-         },
-         mobile: {
-            type: DataTypes.INTEGER,
-            validate: { isNumeric: true, len: [1, 11] },
          },
       },
       {
-         timestamps: false,
+         sequelize,
+         paranoid: true,
+         timestamps: true,
+         // If you want to give a custom name to the deletedAt column
+         deletedAt: "destroyTime",
       }
    );
 };
