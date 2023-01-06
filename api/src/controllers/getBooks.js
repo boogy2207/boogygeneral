@@ -4,7 +4,8 @@ const { axios } = require("axios");
 const { Op } = require("sequelize");
 require("dotenv").config();
 
-const getBooks = async (title) => {
+const getBooks = async (req, res) => {
+   const { title } = req.query;
    if (!title) {
       try {
          const allBooks = await Book.findAll({
@@ -19,7 +20,6 @@ const getBooks = async (title) => {
             const url = await axios.get(
                "https://www.googleapis.com/books/v1/volumes?q={all}&key=AIzaSyC3J4dErWqR63bwO9rBzpMBWrnSIKTmjbk"
             );
-            console.log(url);
             const urlData = await url.data.items;
 
             const booksInfo = await urlData.map((e) => {

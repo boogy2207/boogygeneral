@@ -10,6 +10,13 @@ module.exports = (sequelize) => {
             allowNull: false,
             unique: true,
          },
+         email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+               isEmail: true,
+            },
+         },
          firstname: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -17,26 +24,11 @@ module.exports = (sequelize) => {
          lastname: {
             type: DataTypes.STRING,
             allowNull: false,
-         },
-         age: {
-            type: DataTypes.INTEGER,
+          },
+        administrator: {
+            type: DataTypes.BOOLEAN,
             allowNull: false,
-         },
-         dni: {
-            type: DataTypes.STRING,
-            validate: { isAlpha: true },
-         },
-         city: {
-            type: DataTypes.STRING,
-            validate: { isAlpha: true },
-         },
-         postalcode: {
-            type: DataTypes.INTEGER,
-            validate: { isNumeric: true, len: [1, 6] },
-         },
-         mobile: {
-            type: DataTypes.INTEGER,
-            validate: { isNumeric: true, len: [1, 11] },
+            default: 'false',
          },
       },
       {
