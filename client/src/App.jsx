@@ -18,16 +18,17 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+<NavBar />
       <Box
         display='flex'
         justifyContent='center'
         alignItems='center'
         bgcolor='background.default'
-        height='100px'
+        height='50px'
         width='100%'
       >
-        <Suspense fallback={<h1>Loading...</h1>}><NavBar /></Suspense>
-        <Suspense fallback={<h1>Loading...</h1>}><BtnTheme /></Suspense>
+        <Suspense fallback={<h1>Loading...</h1>}></Suspense>
+        <Suspense fallback={<h1>Loading...</h1>}></Suspense>
       </Box>
       <Card/>
     </ThemeProvider>
