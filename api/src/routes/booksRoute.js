@@ -51,7 +51,7 @@ router.get("/", async (req, res) => {
         });
       });
 
-      res.json(bookyDB, { msg: "Books created" });
+      res.status(200).json(bookyDB);
     } else {
       res.json(booksDatabase);
     }

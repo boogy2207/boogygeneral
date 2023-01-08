@@ -20,8 +20,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavBar />
       <BrowserRouter>
+      <NavBar />
         <Switch>
 
           <Route path={'/book/:id'} component={Detail} />
