@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import BtnTheme from '../BtnTheme';
+import { Link } from "react-router-dom"
 
 const initialState = {
     search: '',
@@ -31,6 +32,7 @@ function NavBar() {
               e-Boogy
             </Typography>
             <Button color="inherit">Login</Button>
+            <Link to='/form'><Button color="inherit">add</Button></Link>
             <BtnTheme />
           </Toolbar>
         </AppBar>

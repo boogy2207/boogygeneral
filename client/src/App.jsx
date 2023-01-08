@@ -20,8 +20,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavBar />
       <BrowserRouter>
+      <NavBar />
         <Switch>
 
           <Route path={'/book/:id'} component={Detail} />
@@ -45,5 +45,6 @@ function App() {
     </ThemeProvider>
   )
 }
+
 
 export default App

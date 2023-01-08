@@ -10,11 +10,8 @@ module.exports = (sequelize) => {
       "category",
       {
          id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
+            type: DataTypes.STRING,
             primaryKey: true,
-            allowNull: false,
-            unique: true,
          },
          category: {
             type: DataTypes.STRING,
@@ -32,12 +29,12 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
          },
       },
-      {
+      /* {
          sequelize,
          paranoid: true,
          timestamps: true,
          // If you want to give a custom name to the deletedAt column
          deletedAt: "destroyTime",
-      }
+      } */
    );
 };
