@@ -13,31 +13,32 @@ export const bookSlice = createSlice({
     },
     price: (state, action) => {
       let ordenSort;
-
+      
+      if (action.payload === "A-Z") {
+        ordenSort = state.books.sort((a, b) => {
+            if (a.title > b.title) return 1;
+            if (a.title < b.title) return -1;
+            return 0;
+          });
+        }
+        
+      if (action.payload === "Z-A") {
+        ordenSort = state.books.sort((a, b) => {
+            if (a.title < b.title) return 1;
+            if (a.title > b.title) return -1;
+            return 0;
+          });
+        }
       if (action.payload === "ASC") {
-        ordenSort = state.allBookys.sort((a, b) => {
-          console.log(
-            typeof a.price === "number" && typeof b.price === "number"
-          );
-          
-          if (typeof a.price === "number" && typeof b.price === "number") {
+        ordenSort = state.books.sort((a, b) => {
             if (a.price < b.price) return 1;
             if (a.price > b.price) return -1;
             return 0;
-          }
-
-          if (typeof a.price === "string" && !isNaN(b.price)) {
-            return 1;
-          }
-
-          if (typeof b.price === "string" && !isNaN(a.price)) {
-            return -1;
-          }
-        });
-      }
+          });
+        }
 
       if (action.payload === "DESC") {
-        ordenSort = state.allBookys.sort((a, b) => {
+        ordenSort = state.books.sort((a, b) => {
           if (a.price > b.price) return 1;
           if (a.price < b.price) return -1;
           return 0;
