@@ -28,15 +28,11 @@ function Cards() {
 
           allBooks.books ? allBooks.books.map(e => (
             <Grid item xs={3}>
-              <Card>
+              <Card sx={{ maxWidth: 345, maxHeight: 445 }}>
                 <CardActionArea>
                   <Link to={'/book/' + e.id}>
-                    <CardMedia
-                      component="img"
-                      height='auto'
-                      image={e.imagelink}
-                      alt="book"
-                    />
+
+                     <img src={e.imagelink} alt="Game" width={'300px'} height={'250px'} />
                   </Link>
                   <CardContent>
 

@@ -8,6 +8,7 @@ const NavBar = lazy(() => import('./components/NavBar'));
 import './App.css'
 import Card from './components/Card';
 import Detail from './components/Detail';
+import Home from './components/Home/Home';
 
 function App() {
 
@@ -21,24 +22,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-      <NavBar />
         <Switch>
 
           <Route path={'/book/:id'} component={Detail} />
 
-          <Route path={'/'}>
-            <Box
-              display='flex'
-              justifyContent='center'
-              alignItems='center'
-              bgcolor='background.default'
-              height='50px'
-              width='100%'
-            >
-              <Suspense fallback={<h1>Loading...</h1>}></Suspense>
-              <Suspense fallback={<h1>Loading...</h1>}></Suspense>
-            </Box>
-            <Card />
+          <Route path={'/'} component={Home}>
+            
           </Route>
         </Switch>
       </BrowserRouter>
