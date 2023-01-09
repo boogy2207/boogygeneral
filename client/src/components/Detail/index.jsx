@@ -9,6 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getBooks } from '../../store/slices/books/booksActions';
+import NavBar from "../NavBar";
 
 export default function Detail(props) {
 
@@ -26,6 +27,7 @@ export default function Detail(props) {
 
     return (
         <>
+        <NavBar/>
             {
                 bookID && bookID.map(e => (
                     <>

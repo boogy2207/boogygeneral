@@ -1,3 +1,5 @@
-div {
-      text-overflow: ellipsis;
-}
+.card {
+      text-align: center;
+      background-color: aqua;
+      border-radius: 5%;
+  }
