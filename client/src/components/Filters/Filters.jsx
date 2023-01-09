@@ -9,7 +9,7 @@ export default function Filtros({ paged }) {
 
     function handleSelect(e) {
 
-        if (e.target.value === 'ASC' || e.target.value === 'DESC') {
+        if (e.target.value === 'ASC' || e.target.value === 'DESC' || e.target.value === 'A-Z' || e.target.value === 'Z-A') {
             dispatch(price(e.target.value))
         }
         else {
