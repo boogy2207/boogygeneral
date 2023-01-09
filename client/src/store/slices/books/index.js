@@ -1,17 +1,65 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const bookSlice = createSlice({
-    name: 'books',
-    initialState: {
-        books: []
+  name: "books",
+  initialState: {
+    books: [],
+    allBookys: [],
+  },
+  reducers: {
+    getAllBooks: (state, action) => {
+      state.books = action.payload;
+      state.allBookys = action.payload;
     },
-    reducers: {
-        getAllBooks: (state,action) => {
-            state.books = action.payload
+    price: (state, action) => {
+      let ordenSort;
+      
+      if (action.payload === "A-Z") {
+        ordenSort = state.books.sort((a, b) => {
+            if (a.title > b.title) return 1;
+            if (a.title < b.title) return -1;
+            return 0;
+          });
         }
-    }
-})
+        
+      if (action.payload === "Z-A") {
+        ordenSort = state.books.sort((a, b) => {
+            if (a.title < b.title) return 1;
+            if (a.title > b.title) return -1;
+            return 0;
+          });
+        }
+      if (action.payload === "ASC") {
+        ordenSort = state.books.sort((a, b) => {
+            if (a.price < b.price) return 1;
+            if (a.price > b.price) return -1;
+            return 0;
+          });
+        }
 
-export const {getAllBooks} = bookSlice.actions
+      if (action.payload === "DESC") {
+        ordenSort = state.books.sort((a, b) => {
+          if (a.price > b.price) return 1;
+          if (a.price < b.price) return -1;
+          return 0;
+        });
+      }
 
-export default bookSlice.reducer
+      state.books = ordenSort;
+    },
+    filter: (state, action) => {
+      if (action.payload === "ALL") {
+        state.books = state.allBookys.filter((e) => e);
+      } else {
+        const filterGenres = state.allBookys.filter(
+          (e) => action.payload === e.category
+        );
+        state.books = filterGenres;
+      }
+    },
+  },
+});
+
+export const { getAllBooks, price, filter } = bookSlice.actions;
+
+export default bookSlice.reducer;

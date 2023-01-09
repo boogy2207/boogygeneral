@@ -1,50 +1,18 @@
-import { Box, createTheme } from '@mui/material';
-import { ThemeProvider } from '@mui/system';
-import { Suspense, lazy } from 'react'
-import { useSelector } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-const BtnTheme = lazy(() => import('./components/BtnTheme'));
-const NavBar = lazy(() => import('./components/NavBar'));
-import './App.css'
-import Card from './components/Card';
-import Detail from './components/Detail';
+import { Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from 'react';
+const Home = lazy(() => import('./components/Home'));
+const Form = lazy(() => import('./components/Form'));
+const Details = lazy(() => import('./components/Detail'));
 
 function App() {
-
-  const themeState = useSelector(state => state.theme.color);
-  const theme = createTheme({
-    palette: {
-      mode: themeState,
-    },
-  });
-
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-      <NavBar />
-        <Switch>
-
-          <Route path={'/book/:id'} component={Detail} />
-
-          <Route path={'/'}>
-            <Box
-              display='flex'
-              justifyContent='center'
-              alignItems='center'
-              bgcolor='background.default'
-              height='50px'
-              width='100%'
-            >
-              <Suspense fallback={<h1>Loading...</h1>}></Suspense>
-              <Suspense fallback={<h1>Loading...</h1>}></Suspense>
-            </Box>
-            <Card />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </ThemeProvider>
-  )
-}
+    <Routes>
+      <Route path='/' element={<Suspense fallback={<div>Loading...</div>}><Home /></Suspense>} />
+      <Route path='/book/:id' element={<Suspense fallback={<div>Loading...</div>}><Details /></Suspense>} />
+      <Route path='/upload-book' element={<Suspense fallback={<div>Loading...</div>}><Form /></Suspense>} />
+    </Routes>
+  );
+};
 
 
 export default App
