@@ -11,6 +11,10 @@ export const bookSlice = createSlice({
       state.books = action.payload;
       state.allBookys = action.payload;
     },
+    getBooksByTitle: (state, action) => {
+      state.books = action.payload;
+      state.allBookys = action.payload;
+   },
     price: (state, action) => {
       let ordenSort;
       
@@ -69,6 +73,6 @@ export const bookSlice = createSlice({
   },
 });
 
-export const { getAllBooks, price, filter,rangePrice } = bookSlice.actions;
+export const { getAllBooks, price, filter,rangePrice, getBooksByTitle } = bookSlice.actions;
 
 export default bookSlice.reducer;
