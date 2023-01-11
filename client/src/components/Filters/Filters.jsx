@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { filter, price } from "../../store/slices/books"
+import { filter, price, rangePrice } from "../../store/slices/books"
 
 export default function Filtros({ paged }) {
 
@@ -18,8 +18,12 @@ export default function Filtros({ paged }) {
 
     }
 
+    function handleRange(e) {
+        dispatch(rangePrice(e.target.value))
+    }
+
     return (
-        <div className='m-10 flex-auto'>
+        <div className='m-10 flex'>
 
             <select onChange={e => handleSelect(e)} className="select select-primary w-full max-w-xs" defaultValue='ASC'>
                 <option disabled selected>Price</option>
@@ -43,6 +47,12 @@ export default function Filtros({ paged }) {
                     })
                 }
             </select>
+            <div className='m-4 ml-11 flex'>
+            <span className='mr-5'>$0</span>
+            <input type="range" min="0" max="7000" onChange={(e) => handleRange(e)} className="range range-xs" />
+            <span className='ml-5'>$7000</span>
+            </div>
+            <span>Price Range</span>
 
         </div>
     )

@@ -57,9 +57,18 @@ export const bookSlice = createSlice({
         state.books = filterGenres;
       }
     },
+    rangePrice: (state, action) => {
+
+      if(parseInt(action.payload) === 0) {
+        state.books = state.allBookys.filter(e => e.price === 'Free Book')
+      }
+      else{
+        state.books = state.allBookys.filter(e => Math.ceil(e.price) < action.payload)
+      }
+    }
   },
 });
 
-export const { getAllBooks, price, filter } = bookSlice.actions;
+export const { getAllBooks, price, filter,rangePrice } = bookSlice.actions;
 
 export default bookSlice.reducer;
