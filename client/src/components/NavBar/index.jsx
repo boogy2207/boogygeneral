@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useInputChange from "../../hooks/useInputChange";
+import SearchBar from "../SearchBar/SearchBar.jsx"
 
 const initialState = {
   search: '',
@@ -17,13 +18,16 @@ function NavBar() {
         <a className="btn btn-ghost normal-case text-xl">e-Boogy</a>
       </div>
       <div className="form-control">
-        <input 
+        <div>
+          <SearchBar/>
+        </div>
+        {/* <input 
         type="text" 
         placeholder="Search" 
         className="input input-bordered" 
         onChange={handleChange}
         value={values.search}
-        />
+        /> */}
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
