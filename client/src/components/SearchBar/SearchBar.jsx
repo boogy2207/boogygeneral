@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useDebounce from "../../hooks/useDebounce";
@@ -8,15 +7,15 @@ const initialState = {
   search: "",
 };
 
-// function SearchBar({ setCurrentPage }) {
 function SearchBar() {
-  const [title, setTitle] = useState("");
+
 
   const dispatch = useDispatch();
 
 
-  const { values, errors, handleChange } = useInputChange(initialState);
+  const { values, handleChange } = useInputChange(initialState);
   const debounce = useDebounce(values.search, 2000)
+
   useEffect(() => {
     if (debounce.length > 0) {
       dispatch(getByTitle(debounce));
@@ -24,22 +23,7 @@ function SearchBar() {
       dispatch(getByTitle(""));
     }
   }, [debounce])
-  // initialStateValues,
-  // initialStateErrors
 
-  // function handleInputChange(e) {
-  //    e.preventDefault();
-  //    setName(e.target.value);
-  // }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(getByTitle(title));
-    setName("");
-    // setCurrentPage(1);
-  };
-  const handleInputChange = (e) => {
-    setTitle(e.target.value);
-  };
 
   return (
     <div className="searchbar-div">
@@ -52,14 +36,6 @@ function SearchBar() {
           placeholder="Search"
           className="input input-bordered"
         />
-      </div>
-
-      <br />
-      <div>
-
-        {/* <button onClick={(e) => handleSubmit(e)} type="submit">
-          SEARCH
-        </button> */}
       </div>
     </div>
   );
