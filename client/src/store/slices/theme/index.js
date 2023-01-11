@@ -17,9 +17,9 @@ export const themeSlice = createSlice({
   initialState,
   reducers: {
     changeTheme: (state, action) => {
-      const setColor = action.payload === "dark" ? "light" : "dark";
-      localStorage.setItem(COLOR, setColor);
-      return { ...state, [COLOR]: setColor };
+      // const setColor = action.payload === "dark" ? "light" : "dark";
+      // localStorage.setItem(COLOR, setColor);
+      // return { ...state, [COLOR]: setColor };
     },
   },
 });

@@ -3,14 +3,20 @@ import { Suspense, lazy } from 'react';
 const Home = lazy(() => import('./components/Home'));
 const Form = lazy(() => import('./components/Form'));
 const Details = lazy(() => import('./components/Detail'));
+const Cart = lazy(() => import('./components/Cart'));
+const NavBar = lazy(() => import('./components/NavBar'));
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<Suspense fallback={<div>Loading...</div>}><Home /></Suspense>} />
-      <Route path='/book/:id' element={<Suspense fallback={<div>Loading...</div>}><Details /></Suspense>} />
-      <Route path='/upload-book' element={<Suspense fallback={<div>Loading...</div>}><Form /></Suspense>} />
-    </Routes>
+    <>
+      <Suspense fallback={<div>Loading...</div>}><NavBar /></Suspense>
+      <Routes>
+        <Route path='/' element={<Suspense fallback={<div>Loading...</div>}><Home /></Suspense>} />
+        <Route path='/book/:id' element={<Suspense fallback={<div>Loading...</div>}><Details /></Suspense>} />
+        <Route path='/upload-book' element={<Suspense fallback={<div>Loading...</div>}><Form /></Suspense>} />
+        <Route path='/cart' element={<Suspense fallback={<div>Loading...</div>}><Cart /></Suspense>} />
+      </Routes>
+    </>
   );
 };
 
