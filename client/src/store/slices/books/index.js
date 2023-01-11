@@ -11,6 +11,10 @@ export const bookSlice = createSlice({
       state.books = action.payload;
       state.allBookys = action.payload;
     },
+    getBooksByTitle: (state, action) => {
+      state.books = action.payload;
+      state.allBookys = action.payload;
+   },
     price: (state, action) => {
       let ordenSort;
       
@@ -57,9 +61,18 @@ export const bookSlice = createSlice({
         state.books = filterGenres;
       }
     },
+    rangePrice: (state, action) => {
+
+      if(parseInt(action.payload) === 0) {
+        state.books = state.allBookys.filter(e => e.price === 'Free Book')
+      }
+      else{
+        state.books = state.allBookys.filter(e => Math.ceil(e.price) < action.payload)
+      }
+    }
   },
 });
 
-export const { getAllBooks, price, filter } = bookSlice.actions;
+export const { getAllBooks, price, filter,rangePrice, getBooksByTitle } = bookSlice.actions;
 
 export default bookSlice.reducer;

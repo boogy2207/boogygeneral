@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
-import { filter, price } from "../../store/slices/books"
+import { filter, price, rangePrice } from "../../store/slices/books"
 
-export default function Filtros({ paged }) {
+export default function Filtros() {
 
     const dispatch = useDispatch()
 
@@ -18,24 +18,28 @@ export default function Filtros({ paged }) {
 
     }
 
+    function handleRange(e) {
+        dispatch(rangePrice(e.target.value))
+    }
+
     return (
-        <div className='m-10 flex-auto'>
+        <div className='m-10 flex'>
 
             <select onChange={e => handleSelect(e)} className="select select-primary w-full max-w-xs" defaultValue='ASC'>
-                <option disabled selected>Price</option>
+                <option disabled>Price</option>
                 <option value="ASC">Mayor a Menor </option>
                 <option value="DESC">Menor a Mayor</option>
             </select>
 
             <select onChange={e => handleSelect(e)} className="select select-primary w-full max-w-xs" defaultValue='A-Z'>
-                <option disabled selected>Alphabetic</option>
+                <option disabled>Alphabetic</option>
                 <option value="A-Z">A-Z</option>
                 <option value="Z-A">Z-A</option>
             </select>
 
 
             <select onChange={e => handleSelect(e)} className="select select-primary w-full max-w-xs" defaultValue='ALL'>
-                <option selected disabled>Genre</option>
+                <option disabled>Genre</option>
                 <option value="ALL">ALL</option>
                 {
                     books.allBookys?.map(e => {
@@ -43,6 +47,12 @@ export default function Filtros({ paged }) {
                     })
                 }
             </select>
+            <div className='m-4 ml-11 flex'>
+                <span className='mr-5'>$0</span>
+                <input type="range" min="0" max="7000" onChange={(e) => handleRange(e)} className="range range-xs" />
+                <span className='ml-5'>$7000</span>
+            </div>
+            <span>Price Range</span>
 
         </div>
     )

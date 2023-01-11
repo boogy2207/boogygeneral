@@ -1,19 +1,65 @@
-import { useDispatch, useSelector } from "react-redux";
 import { changeTheme } from "../../store/slices/theme";
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Button from '@mui/material/Button';
+import { useEffect } from 'react'
+import { themeChange } from 'theme-change'
+import { useDispatch } from "react-redux";
 
 function BtnTheme() {
 
-    const themeContext = useSelector(state => state.theme.color)
     const dispatch = useDispatch();
 
-    const handleChange = () => {
-        dispatch(changeTheme(themeContext))
+    const handleChange = ({ target }) => {
+        dispatch(changeTheme(target.value));
     };
 
+    useEffect(() => {
+        themeChange(false)
+        // 👆 false parameter is required for react project
+    }, [])
+
+    const themes = [
+        "light",
+        "dark",
+        "cupcake",
+        "bumblebee",
+        "emerald",
+        "corporate",
+        "synthwave",
+        "retro",
+        "cyberpunk",
+        "valentine",
+        "halloween",
+        "garden",
+        "forest",
+        "aqua",
+        "lofi",
+        "pastel",
+        "fantasy",
+        "wireframe",
+        "black",
+        "luxury",
+        "dracula",
+        "cmyk",
+        "autumn",
+        "business",
+        "acid",
+        "lemonade",
+        "night",
+        "coffee",
+        "winter",
+    ];
+
     return (
-        <Button variant="contained" onClick={handleChange}><Brightness4Icon/></Button>
+        <select
+            data-choose-theme
+            onChange={handleChange}
+            className='select select-primary'
+        >
+            {themes.map((theme) => (
+                <option key={theme} value={theme}>
+                    {theme}
+                </option>
+            ))}
+        </select>
     );
 };
 export default BtnTheme;
