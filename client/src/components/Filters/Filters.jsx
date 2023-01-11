@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { filter, price, rangePrice } from "../../store/slices/books"
 
-export default function Filtros({ paged }) {
+export default function Filtros() {
 
     const dispatch = useDispatch()
 

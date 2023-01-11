@@ -1,33 +1,19 @@
 import { Link } from "react-router-dom";
 import useInputChange from "../../hooks/useInputChange";
+import BtnTheme from "../BtnTheme";
 import SearchBar from "../SearchBar/SearchBar.jsx"
 
-const initialState = {
-  search: '',
-  name: ''
-}
 
 function NavBar() {
-
-
-  const {values, handleChange} = useInputChange(initialState);
 
   return (
     <div className="navbar bg-primary">
       <div className="flex-1">
         <a className="btn btn-ghost normal-case text-xl">e-Boogy</a>
       </div>
-      <div className="form-control">
-        <div>
-          <SearchBar/>
-        </div>
-        {/* <input 
-        type="text" 
-        placeholder="Search" 
-        className="input input-bordered" 
-        onChange={handleChange}
-        value={values.search}
-        /> */}
+      <div className="flex justify-center gap-3" >
+        <SearchBar />
+        <BtnTheme />
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
