@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { filter, price, rangePrice } from "../../store/slices/books"
 
-export default function Filtros({ paged }) {
+export default function Filtros() {
 
     const dispatch = useDispatch()
-
     const books = useSelector(state => state.books)
 
     function handleSelect(e) {
@@ -15,7 +15,10 @@ export default function Filtros({ paged }) {
         else {
             dispatch(filter(e.target.value))
         }
+    }
 
+    function handleRange(e) {
+        dispatch(rangePrice(e.target.value))
     }
 
     function handleRange(e) {
@@ -23,23 +26,23 @@ export default function Filtros({ paged }) {
     }
 
     return (
-        <div className='m-10 flex'>
+        <div className='mt-10 flex justify-center items-center gap-6'>
 
-            <select onChange={e => handleSelect(e)} className="select select-primary w-full max-w-xs" defaultValue='ASC'>
-                <option disabled selected>Price</option>
+            <select onChange={e => handleSelect(e)} className="select select-primary max-w-xs" defaultValue='ASC'>
+                <option disabled>Price</option>
                 <option value="ASC">Mayor a Menor </option>
                 <option value="DESC">Menor a Mayor</option>
             </select>
 
-            <select onChange={e => handleSelect(e)} className="select select-primary w-full max-w-xs" defaultValue='A-Z'>
-                <option disabled selected>Alphabetic</option>
+            <select onChange={e => handleSelect(e)} className="select select-primary max-w-xs" defaultValue='A-Z'>
+                <option disabled>Alphabetic</option>
                 <option value="A-Z">A-Z</option>
                 <option value="Z-A">Z-A</option>
             </select>
 
 
-            <select onChange={e => handleSelect(e)} className="select select-primary w-full max-w-xs" defaultValue='ALL'>
-                <option selected disabled>Genre</option>
+            <select onChange={e => handleSelect(e)} className="select select-primary max-w-xs" defaultValue='ALL'>
+                <option disabled>Genre</option>
                 <option value="ALL">ALL</option>
                 {
                     books.allBookys?.map(e => {

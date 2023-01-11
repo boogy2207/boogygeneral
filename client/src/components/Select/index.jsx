@@ -1,6 +1,5 @@
 function Select({ value, handleChange, optionsMap, disabledPlaceHorder, className }) {
 
-
     return (
         <select
             className={className}
@@ -8,12 +7,7 @@ function Select({ value, handleChange, optionsMap, disabledPlaceHorder, classNam
             name='language'
             onChange={handleChange}
         >
-            <option value='' disabled selected>{disabledPlaceHorder}</option>
-            {/* {allBooks.language.map((e) => (
-                <option type='text' value={e.name} key={e.id}>
-                    {e.name}
-                </option>
-            ))} */}
+            <option value='' disabled>{disabledPlaceHorder}</option>
             {
                 optionsMap.map((opt) => {
                     return (

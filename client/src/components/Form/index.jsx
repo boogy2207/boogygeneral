@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllBooks } from "../../store/slices/books";
-import validate from "../../helpers/validates";
 import useInputChange from "../../hooks/useInputChange";
 import Select from "../Select";
+import Label from "../Label";
 
 const initialStateValues = {
     title: "",
@@ -29,51 +26,24 @@ const initialStateErrors = {
 };
 
 const Form = () => {
-    const dispatch = useDispatch();
 
-    const Books = useSelector((state) => state.Books);
+    const { values, handleChange } = useInputChange(initialStateValues, initialStateErrors);
 
-    const { values, errors, handleChange } = useInputChange(initialStateValues, initialStateErrors);
-
-    useEffect(() => {
-        dispatch(getAllBooks());
-    }, [dispatch]);
-
+    // petition to the server to get languages
+    // petition to the server to create a new book
 
     const onSubmit = (e) => {
         e.preventDefault(e);
         //   if (!Object.entries(errors).length) {
         //      dispatch(newBook(formValues));
-        //      setFormValues({
-        //         title: "",
-        //         authors: "",
-        //         description: "",
-        //         category: "",
-        //         pagecount: "",
-        //         imagelink: "",
-        //         language: "",
-        //         price: "",
-        //      });
+        //      setFormValues(initialStateValues);
         //      alert(formValues.title + " created Succesfully");
-        //      history.push("/books"); //or homepage, or whatever
+        //      navigate("/"); //or homepage, or whatever
         //   } else {
         //      let e = Object.values(errors);
-        //      alert(JSON.stringify("Please correct: " + e));
+        //      alert(JSON.stringify(`Please correct: ${e}`));
         //   }
     };
-
-    // function handleSelect(e) {
-    //     setFormValues({
-    //         ...formValues,
-    //         language: [...formValues.language, e.target.value],
-    //     });
-    //     setErrors(
-    //         validate({
-    //             ...formValues,
-    //             language: [...formValues.language, e.target.value],
-    //         })
-    //     );
-    // }
 
     return (
         <>
@@ -83,28 +53,27 @@ const Form = () => {
             <form onSubmit={onSubmit} className="form-control flex items-center justify-center">
                 <h1 className="text-5xl font-bold m-3">Upload Book</h1>
                 <div>
-                    <label className="input-group m-5">
-                        <span>Title</span>
-                        <input type="text"
-                            placeholder="Type Here!"
-                            className="input input-bordered input-primary w-full max-w-xs"
-                            value={values.title}
-                            onChange={handleChange}
-                            name='title'
-                        />
-                    </label>
+                    <Label
+                        classNameSpan="input-group m-5"
+                        classNameInput="input input-bordered input-primary w-full max-w-xs"
+                        titleSpan='Title'
+                        placeholder='Type Here!'
+                        value={values.title}
+                        handleChange={handleChange}
+                        name='title'
+                        type='text'
+                    />
                     {/**------------------------------------------------------------------------------------*/}
-                    <label className="input-group m-5">
-                        <span>Authors</span>
-                        <input
-                            type="text"
-                            placeholder="Type Here!"
-                            className="input input-bordered input-primary w-full max-w-xs"
-                            value={values.authors.toLowerCase()}
-                            onChange={handleChange}
-                            name='authors'
-                        />
-                    </label>
+                    <Label
+                        classNameSpan="input-group m-5"
+                        classNameInput="input input-bordered input-primary w-full max-w-xs"
+                        titleSpan='Authors'
+                        type="text"
+                        placeholder="Type Here!"
+                        value={values.authors.toLowerCase()}
+                        handleChange={handleChange}
+                        name='authors'
+                    />
                     {/**------------------------------------------------------------------------------------*/}
                     <label className="input-group m-5">
                         <span>Description</span>
@@ -118,58 +87,61 @@ const Form = () => {
                         />
                     </label>
                     {/**------------------------------------------------------------------------------------*/}
-                    <label className="input-group m-5">
-                        <span>Category</span>
-                        <input
-                            type="text"
-                            placeholder="Type Here!"
-                            className="input input-bordered input-primary w-full max-w-xs"
-                            value={values.category.toLowerCase()}
-                            onChange={handleChange}
-                            name='category'
-                        />
-                    </label>
+                    <Label classNameSpan="input-group m-5"
+                        classNameInput="input input-bordered input-primary w-full max-w-xs"
+                        titleSpan='Category'
+                        type="text"
+                        placeholder="Type Here!"
+                        value={values.category.toLowerCase()}
+                        handleChange={handleChange}
+                        name='category'
+                    />
+
                     {/**------------------------------------------------------------------------------------*/}
-                    <label className="input-group m-5">
-                        <span>Pages</span>
-                        <input
-                            type="text"
-                            placeholder="Type Here!"
-                            className="input input-bordered input-primary w-full max-w-xs"
-                            value={values.pagecount.toLowerCase()}
-                            onChange={handleChange}
-                            name='pagecount'
-                        />
-                    </label>
+                    <Label
+                        classNameSpan="input-group m-5"
+                        classNameInput="input input-bordered input-primary w-full max-w-xs"
+                        titleSpan='Page Count'
+                        type="text"
+                        placeholder="Type Here!"
+                        value={values.pagecount}
+                        handleChange={handleChange}
+                        name='pagecount'
+                    />
                     {/**------------------------------------------------------------------------------------*/}
-                    <label className="input-group m-5">
-                        <span>Image Link</span>
-                        <input type="text" placeholder="Type Here!" className="input input-bordered input-primary w-full max-w-xs" />
-                    </label>
+                    <Label
+                        classNameSpan="input-group m-5"
+                        classNameInput="input input-bordered input-primary w-full max-w-xs"
+                        titleSpan='Image Link'
+                        type="url"
+                        placeholder="Type Here!"
+                        value={values.imagelink}
+                        handleChange={handleChange}
+                        name='imagelink'
+                    />
+
                     {/**------------------------------------------------------------------------------------*/}
-                    <label className="input-group m-5">
-                        <span>Languages</span>
-                        <input
-                            type="text"
-                            placeholder="Type Here!"
-                            className="input input-bordered input-primary w-full max-w-xs"
-                            value={values.imagelink.toLowerCase()}
-                            onChange={handleChange}
-                            name='imagelink'
-                        />
-                    </label>
+                    <Label
+                        classNameSpan="input-group m-5"
+                        classNameInput="input input-bordered input-primary w-full max-w-xs"
+                        titleSpan='Price'
+                        type="text"
+                        placeholder="Type Here!"
+                        value={values.price}
+                        handleChange={handleChange}
+                        name='price'
+                    />
                     {/**------------------------------------------------------------------------------------*/}
-                    <label className="input-group m-5">
-                        <span>Price</span>
-                        <input
-                            type="text"
-                            placeholder="Type Here!"
-                            className="input input-bordered input-primary w-full max-w-xs"
-                            value={values.imagelink.toLowerCase()}
-                            onChange={handleChange}
-                            name='imagelink'
-                        />
-                    </label>
+                    <Label
+                        classNameSpan="input-group m-5"
+                        classNameInput="input input-bordered input-primary w-full max-w-xs"
+                        titleSpan='Language'
+                        type="text"
+                        placeholder="Type Here!"
+                        value={values.language}
+                        handleChange={handleChange}
+                        name='language'
+                    />
                     {/**------------------------------------------------------------------------------------*/}
                     <Select
                         className='m-5 select select-primary w-full max-w-xs'
@@ -178,9 +150,7 @@ const Form = () => {
                         optionsMap={['ES', 'US', 'FR', 'CH']}
                         disabledPlaceHorder={'Select a Language'}
                     />
-
                 </div>
-                <div>waiting for a book...</div>
                 <button className="btn">Add Book</button>
             </form>
         </>
@@ -188,53 +158,3 @@ const Form = () => {
 };
 
 export default Form;
-
-
-/* 
-                            <td>
-                                <label>Languages: </label>
-                            </td>
-                            <td>
-                                <select
-                                    value={formValues.language}
-                                    name='language'
-                                    onChange={(e) => handleSelect(e)}>
-                                    <option value={""}></option>
-                                    
-                                    {allBooks.language.map((e) => (
-                              <option type='text' value={e.name} key={e.id}>
-                                 {e.name}
-                              </option>
-                           ))}
-                                    <option type='text' value={formValues.es}>
-                                        ES
-                                    </option>
-                                    <option type='text' value={formValues.us}>
-                                        US
-                                    </option>
-                                    <option type='text' value={formValues.fr}>
-                                        FR
-                                    </option>
-                                    <option type='text' value={formValues.ch}>
-                                        CH
-                                    </option>
-                                </select >
-                            </td >
-                        </tr >
-    <tr>
-        <td>
-            <label>Price: </label>
-        </td>
-        <td>
-            <input
-                value={formValues.price.toLowerCase()}
-                onChange={handleInputChange}
-                name='price'
-                size='25'
-                type='text'
-                placeholder='Type the name of the price'></input>
-        </td>
-    </tr>
-                    </tbody >
-                </table >
-*/
