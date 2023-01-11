@@ -16,15 +16,14 @@ function SearchBar() {
 
 
   const { values, errors, handleChange } = useInputChange(initialState);
-   const debounce = useDebounce(values.search,2000)
-   console.log(debounce)
-   useEffect(()=>{
-      if(debounce.length > 0){
-         setTitle(debounce)
-      }else{
-         
-      }
-   },[debounce])
+  const debounce = useDebounce(values.search, 2000)
+  useEffect(() => {
+    if (debounce.length > 0) {
+      dispatch(getByTitle(debounce));
+    } else {
+      dispatch(getByTitle(""));
+    }
+  }, [debounce])
   // initialStateValues,
   // initialStateErrors
 
@@ -46,8 +45,8 @@ function SearchBar() {
     <div className="searchbar-div">
       <div className="form-control">
         <input
-        name="search"
-         value={values.search}
+          name="search"
+          value={values.search}
           onChange={handleChange}
           type="text"
           placeholder="Search"
