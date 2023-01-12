@@ -7,13 +7,12 @@ import { addToCart } from '../../store/slices/cart';
 
 function Cards() {
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getBooks())
   }, [])
 
   const allBooks = useSelector(state => state.books);
+  const dispatch = useDispatch();
 
   const addItem = (book) => {
     dispatch(addToCart(book))
