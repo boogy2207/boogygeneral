@@ -7,6 +7,7 @@ const routes = require("./routes/index.js");
 require("dotenv").config();
 
 const { DB_ACCESS_TOKEN } = process.env;
+
 // SDK de MercadoPago
 const mercadopago = require("mercadopago");
 // Agrega credenciales mercadoPago

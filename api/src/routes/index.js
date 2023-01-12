@@ -8,6 +8,7 @@ const booksRouteDB = require("./booksRoute");
 const router = Router();
 
 const mercadoPago = require("./mercadoPago");
+
 router.use(cors());
 
 router.use("/books", booksRouteDB);
