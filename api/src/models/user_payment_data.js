@@ -26,11 +26,6 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
          },
-         account_no: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            default: "cash",
-         },
       },
       {
          sequelize,
