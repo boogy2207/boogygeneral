@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
    sequelize.define(
-      "cart",
+      "cart_item",
       {
          id: {
             type: DataTypes.INTEGER,
@@ -9,10 +9,17 @@ module.exports = (sequelize) => {
             primaryKey: true,
             allowNull: false,
          },
+         quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+         },
       },
       {
-         timestamps: true,
+         sequelize,
          paranoid: true,
+         timestamps: true,
+         // If you want to give a custom name to the deletedAt column
+         deletedAt: "destroyTime",
       }
    );
 };

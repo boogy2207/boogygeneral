@@ -9,6 +9,7 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { userInfo } = require("os");
+const cart = require("./models/cart");
 // const { userInfo } = require("os");
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
@@ -52,7 +53,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-const { Book, Category, Book_inventory, Client, Cart } = sequelize.models;
+const { Book, Category, Book_inventory, Client, Cart_item, Cart } =
+   sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -66,11 +68,17 @@ Book_inventory.hasOne(Book);
 Client.belongsToMany(Book, { through: "favorites", paranoid: true });
 Book.belongsToMany(Client, { through: "favorites", paranoid: true });
 
+Cart.belongsTo(Cart_item);
+Cart_item.belongsTo(Cart);
+
+Cart_item.hasOne(Book);
+Book.hasOne(Cart_item);
+
 // userInfo.hasOne();
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-Cart.module.exports = {
+module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
    conn: sequelize, // para importart la conexión { conn } = require('./db.js');
 };
