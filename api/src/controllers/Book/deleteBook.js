@@ -1,4 +1,4 @@
-const { Book } = require("../db");
+const { Book } = require("../../db");
 
 const deleteBook = async (id, title) => {
    try {
