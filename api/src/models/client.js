@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
    sequelize.define(
-      "user_data",
+      "client",
       {
          id: {
             type: DataTypes.INTEGER,
@@ -24,15 +24,16 @@ module.exports = (sequelize) => {
          lastname: {
             type: DataTypes.STRING,
             allowNull: false,
-          },
-        administrator: {
+         },
+         administrator: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            default: 'false',
+            default: "false",
          },
       },
       {
          timestamps: false,
+         paranoid: true,
       }
    );
 };
