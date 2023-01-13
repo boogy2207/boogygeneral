@@ -1,7 +1,10 @@
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import useInputChange from "../../hooks/useInputChange";
 import Select from "../Select";
 import Label from "../Label";
+import Cloudinary from "../Cloudinary";
+
 
 const initialStateValues = {
     title: "",
@@ -109,17 +112,20 @@ const Form = () => {
                         name='pagecount'
                     />
                     {/**------------------------------------------------------------------------------------*/}
-                    <Label
+                    {/* <Label
                         classNameSpan="input-group m-5"
                         classNameInput="input input-bordered input-primary w-full max-w-xs"
-                        titleSpan='Image Link'
+                         titleSpan='Image Link'
                         type="url"
                         placeholder="Type Here!"
                         value={values.imagelink}
                         handleChange={handleChange}
-                        name='imagelink'
-                    />
-
+                        name='imagelink' 
+                    />  */}
+                    <label className="input-group m-5">
+                        <span>Image</span>
+                        <Cloudinary />
+                    </label>
                     {/**------------------------------------------------------------------------------------*/}
                     <Label
                         classNameSpan="input-group m-5"
@@ -157,4 +163,6 @@ const Form = () => {
     );
 };
 
-export default Form;
+export default withAuthenticationRequired(Form, {
+    onRedirecting: () => <div>Redirecting you to the login page...</div>,
+});
