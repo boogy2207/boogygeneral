@@ -1,7 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { postUser } from "../../store/slices/auth";
 import BtnTheme from "../BtnTheme";
 import Login from "../Login";
 import Logout from "../Logout";
@@ -15,9 +16,8 @@ function NavBar() {
   const { isAuthenticated } = useAuth0();
 
 
-
   return (
-    <div className="navbar bg-primary">
+    <div className="navbar">
       <div className="flex-1">
         <Link to='/' className="btn btn-ghost normal-case text-xl">e-Boogy</Link>
       </div>

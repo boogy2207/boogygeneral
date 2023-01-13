@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useInputChange from "../../hooks/useInputChange";
 import Select from "../Select";
 import Label from "../Label";
-import Cloudinary from "../Cloudinary/Cloudinary";
+import Cloudinary from "../Cloudinary";
 
 
 const initialStateValues = {
@@ -112,7 +112,7 @@ const Form = () => {
                         name='pagecount'
                     />
                     {/**------------------------------------------------------------------------------------*/}
-                     {/* <Label
+                    {/* <Label
                         classNameSpan="input-group m-5"
                         classNameInput="input input-bordered input-primary w-full max-w-xs"
                          titleSpan='Image Link'
@@ -124,7 +124,7 @@ const Form = () => {
                     />  */}
                     <label className="input-group m-5">
                         <span>Image</span>
-                    <Cloudinary/>
+                        <Cloudinary />
                     </label>
                     {/**------------------------------------------------------------------------------------*/}
                     <Label
