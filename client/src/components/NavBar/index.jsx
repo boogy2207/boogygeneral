@@ -12,39 +12,9 @@ function NavBar() {
 
   const count = useSelector(state => state.cart.count);
   const subTotal = useSelector(state => state.cart.subTotal);
-  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
-  const [userMetadata, setUserMetadata] = useState(null);
+  const { isAuthenticated } = useAuth0();
 
-  // useEffect(() => {
-  //   const getUserMetadata = async () => {
-  //     const domain = "pfreactbooks.us.auth0.com";
 
-  //     try {
-  //       const accessToken = await getAccessTokenSilently({
-  //         audience: `https://${domain}/api/v2/`,
-  //         scope: "read:current_user",
-  //       });
-
-  //       const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-
-  //       const metadataResponse = await fetch(userDetailsByIdUrl, {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       });
-
-  //       const { user_metadata } = await metadataResponse.json();
-
-  //       setUserMetadata(user_metadata);
-  //     } catch (e) {
-  //       console.log(e.message);
-  //     }
-  //   };
-
-  //   getUserMetadata();
-  // }, [getAccessTokenSilently, user?.sub]);
-
-  console.log(userMetadata);
 
   return (
     <div className="navbar bg-primary">
