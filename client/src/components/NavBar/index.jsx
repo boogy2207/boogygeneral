@@ -6,14 +6,13 @@ import SearchBar from "../SearchBar/SearchBar.jsx"
 
 function NavBar() {
 
-  const cart = useSelector(state => state.cart.cart);
   const count = useSelector(state => state.cart.count);
   const subTotal = useSelector(state => state.cart.subTotal);
 
   return (
     <div className="navbar bg-primary">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">e-Boogy</a>
+        <Link to='/' className="btn btn-ghost normal-case text-xl">e-Boogy</Link>
       </div>
       <div className="flex justify-center gap-3" >
         <SearchBar />
@@ -32,10 +31,8 @@ function NavBar() {
               <span className="font-bold text-lg">{count} Items</span>
               <span className="text-info">Subtotal: ${subTotal}</span>
               <div className="card-actions">
-                <Link to='/cart'>
-                  <button className="btn btn-primary btn-block">
-                    View Cart
-                  </button>
+                <Link to='/cart' className="btn btn-primary btn-block">
+                  View Cart
                 </Link>
               </div>
             </div>

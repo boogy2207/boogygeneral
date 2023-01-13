@@ -10,19 +10,41 @@ const initialState = {
   subTotal: 0,
 };
 
-localStorage.getItem(CART) && (initialState.cart = localStorage.getItem(CART));
-localStorage.getItem(COUNT) &&
-  (initialState.count = JSON.parse(localStorage.getItem(CART)).length);
-localStorage.getItem(SUBTOTAL) &&
-  (initialState.subTotal = JSON.parse(localStorage.getItem(SUBTOTAL)));
+let getLocalStorageCart = JSON.parse(localStorage.getItem(CART));
+let getLocalStorageCount = JSON.parse(localStorage.getItem(COUNT));
+let getLocalStorageSubTotal = JSON.parse(localStorage.getItem(SUBTOTAL));
+
+getLocalStorageCart && (initialState.cart = getLocalStorageCart);
+getLocalStorageCount && (initialState.count = getLocalStorageCount);
+getLocalStorageSubTotal && (initialState.subTotal = getLocalStorageSubTotal);
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const { id, title, price, quantity = 1 } = action.payload;
-      const item = { id, title, price, quantity };
+      const {
+        id,
+        title,
+        price,
+        authors,
+        category,
+        imagelink,
+        language,
+        pagecount,
+        quantity = 1,
+      } = action.payload;
+      const item = {
+        id,
+        title,
+        price,
+        quantity,
+        authors,
+        category,
+        imagelink,
+        language,
+        pagecount,
+      };
       if (state.cart.some((item) => item.id === id)) {
         state.cart = state.cart.map((item) => {
           if (item.id === id) {
@@ -30,6 +52,7 @@ export const cartSlice = createSlice({
           }
           return item;
         });
+        localStorage.setItem(CART, JSON.stringify(state.cart));
       } else {
         localStorage.setItem(CART, JSON.stringify([...state.cart, item]));
         state.cart = [...state.cart, item];
@@ -41,7 +64,7 @@ export const cartSlice = createSlice({
         localStorage.setItem(SUBTOTAL, state.subTotal);
       }
     },
-    deleteItemFromCart: (state, action) => {
+    removeItemFromCart: (state, action) => {
       const { id, price } = action.payload;
       if (state.cart.some((item) => item.id === id)) {
         state.cart = state.cart.map((item) => {
@@ -50,17 +73,33 @@ export const cartSlice = createSlice({
           }
           return item;
         });
+        localStorage.setItem(CART, JSON.stringify(state.cart));
       } else {
         state.cart = state.cart.filter((item) => item.id !== id);
       }
       state.count--;
+      localStorage.setItem(COUNT, state.count);
       if (!isNaN(Number(price))) {
         state.subTotal -= Number(price);
+        localStorage.setItem(SUBTOTAL, state.subTotal);
+      }
+    },
+    deleteBookFromCart: (state, action) => {
+      const { id, price, quantity } = action.payload;
+      if (state.cart.some((item) => item.id === id)) {
+        state.cart = state.cart.filter((item) => item.id !== id);
+        localStorage.setItem(CART, JSON.stringify(state.cart));
+      }
+      state.count -= quantity;
+      localStorage.setItem(COUNT, state.count);
+      if (!isNaN(Number(price))) {
+        state.subTotal -= Number(price) * quantity;
+        localStorage.setItem(SUBTOTAL, state.subTotal);
       }
     },
   },
 });
 
-export const { addToCart, deleteItemFromCart } = cartSlice.actions;
+export const { addToCart, removeItemFromCart, deleteBookFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

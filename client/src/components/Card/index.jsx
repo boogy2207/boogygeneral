@@ -16,7 +16,7 @@ function Cards() {
 
   const addItem = (book) => {
     dispatch(addToCart(book))
-  }
+  };
 
   return (
     <div className='mt-10 grid justify-center items-center gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
