@@ -40,7 +40,11 @@ module.exports = (sequelize) => {
          },
       },
       {
-         timestamps: false,
+         sequelize,
+         paranoid: true,
+         timestamps: true,
+         // If you want to give a custom name to the deletedAt column
+         deletedAt: "destroyTime",
       }
    );
 };

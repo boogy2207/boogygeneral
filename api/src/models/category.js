@@ -10,8 +10,11 @@ module.exports = (sequelize) => {
       "category",
       {
          id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true,
+            allowNull: false,
+            unique: true,
          },
          category: {
             type: DataTypes.STRING,
@@ -28,7 +31,7 @@ module.exports = (sequelize) => {
          pagecount: {
             type: DataTypes.INTEGER,
          },
-      },
+      }
       /* {
          sequelize,
          paranoid: true,
