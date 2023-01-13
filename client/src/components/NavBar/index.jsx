@@ -1,6 +1,10 @@
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import BtnTheme from "../BtnTheme";
+import Login from "../Login";
+import Logout from "../Logout";
 import SearchBar from "../SearchBar/SearchBar.jsx"
 
 
@@ -8,6 +12,9 @@ function NavBar() {
 
   const count = useSelector(state => state.cart.count);
   const subTotal = useSelector(state => state.cart.subTotal);
+  const { isAuthenticated } = useAuth0();
+
+
 
   return (
     <div className="navbar bg-primary">
@@ -38,22 +45,28 @@ function NavBar() {
             </div>
           </div>
         </div>
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
-            </div>
-          </label>
-          <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-            <li>
-              <Link className="justify-between" to={'/upload-book'}>
-                Cargar Libro
-                <span className="badge">New</span>
-              </Link>
-            </li>
-            <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
-          </ul>
+        <div>
+          {
+            isAuthenticated ? (
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img src="https://placeimg.com/80/80/people" />
+                  </div>
+                </label>
+                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                  <li>
+                    <Link className="justify-between" to={'/upload-book'}>
+                      Cargar Libro
+                      <span className="badge">New</span>
+                    </Link>
+                  </li>
+                  <li><Link to='/profile'>Profile</Link></li>
+                  <li><Logout /></li>
+                </ul>
+              </div>
+            ) : <Login />
+          }
         </div>
       </div>
     </div >
