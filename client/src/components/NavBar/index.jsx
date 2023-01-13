@@ -16,10 +16,6 @@ function NavBar() {
   const { isAuthenticated } = useAuth0();
 
 
-
-
-
-
   return (
     <div className="navbar">
       <div className="flex-1">
