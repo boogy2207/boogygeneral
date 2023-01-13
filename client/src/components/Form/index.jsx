@@ -1,3 +1,4 @@
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import useInputChange from "../../hooks/useInputChange";
 import Select from "../Select";
@@ -157,4 +158,6 @@ const Form = () => {
     );
 };
 
-export default Form;
+export default withAuthenticationRequired(Form, {
+    onRedirecting: () => <div>Redirecting you to the login page...</div>,
+});
